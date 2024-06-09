@@ -6,6 +6,7 @@ use axum::{
 };
 use notify::Watcher;
 use tera::{Context, Tera};
+use tower_http::services::ServeDir;
 use tower_livereload::LiveReloadLayer;
 
 #[macro_use]
@@ -59,6 +60,10 @@ fn setup_reload_watchers(reloader: tower_livereload::Reloader) -> Result<(), not
         std::path::Path::new("templates"),
         notify::RecursiveMode::Recursive,
     )?;
+    watcher.watch(
+        std::path::Path::new("public"),
+        notify::RecursiveMode::Recursive,
+    )?;
 
     Ok(())
 }
@@ -69,7 +74,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let reloader = live_reload.reloader();
     setup_reload_watchers(reloader)?;
 
-    let app = Router::new().route("/", get(index_page)).layer(live_reload);
+    let app = Router::new()
+        .nest_service("/public", ServeDir::new("public"))
+        .route("/", get(index_page))
+        .layer(live_reload);
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
 

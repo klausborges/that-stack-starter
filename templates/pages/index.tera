@@ -1,24 +1,45 @@
 {% extends 'layouts/base.tera' %}
 
-{% block title %}THAT Stack{% endblock %}
+{% block title %}that stack{% endblock %}
 
 {% block content %}
-  <h1>Welcome!</h1>
+  <main class="text-xl leading-8">
+    <h1 class="pb-4 text-4xl font-semibold text-sky-300">welcome!</h1>
 
-  <p>
-    This is the index page for
-    <span class="font-semibold">THAT Stack*</span>
-  </p>
+    <p>
+      index page for
+      <span>
+        <span class="font-semibold text-sky-300">that stack</span>
+        *
+      </span>
+    </p>
 
-  <ul>
-    <li>Tera</li>
-    <li>HTMX</li>
-    <li>Axum</li>
-    <li>TailwindCSS</li>
-  </ul>
+    <ul class="py-2 pl-4">
+      <li>tera</li>
+      <li>htmx</li>
+      <li>axum</li>
+      <li>tailwind</li>
+    </ul>
 
-  <p class="text-xs">
-    * Calling this a stack is a joke. Just pick the tools that make sense for
-    your project.
-  </p>
+    <h2 class="pb-1 pt-2 text-2xl font-semibold text-sky-300">context</h2>
+
+    <ul class="py-2 pl-4 leading-9">
+      <li class="flex gap-2">
+        <pre class="text-sky-100/90">from_global_context</pre>
+        <pre>=</pre>
+        <pre>"{{ from_global_context }}"</pre>
+      </li>
+
+      <li class="flex gap-2">
+        <pre class="text-sky-100/90">from_page_context</pre>
+        <pre>=</pre>
+        <pre>"{{ from_page_context }}"</pre>
+      </li>
+    </ul>
+
+    <p class="pt-4 text-xs opacity-50">
+      * calling this a stack is a joke, pick the tools that make sense for your
+      project
+    </p>
+  </main>
 {% endblock %}
