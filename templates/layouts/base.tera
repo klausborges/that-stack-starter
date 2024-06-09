@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/public/styles.css" rel="stylesheet" />
     {% block head %}
-      <title>{% block title %}{% endblock title %}</title>
+      <title>{% block title %}that stack{% endblock title %}</title>
     {% endblock head %}
   </head>
   <body class="min-h-dvh bg-zinc-950">

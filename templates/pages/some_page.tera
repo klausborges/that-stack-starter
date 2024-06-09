@@ -1,35 +1,30 @@
 {%- extends 'layouts/base.tera' -%}
 {%- import 'macros/context.tera' as context -%}
 
-{%- block title -%}index | that stack{%- endblock -%}
+{%- block title -%}some page | that stack{%- endblock -%}
 
 {%- block content -%}
   <main class="text-xl leading-8">
     <h1 class="pb-4 text-4xl font-semibold text-sky-300">welcome!</h1>
 
     <p>
-      index page for
+      some page for
       <span>
         <span class="font-semibold text-sky-300">that stack</span>
         *
       </span>
     </p>
 
-    <ul class="py-2 pl-4">
-      <li>tera</li>
-      <li>htmx</li>
-      <li>axum</li>
-      <li>tailwind</li>
-    </ul>
-
-    <h2 class="pb-1 pt-2 text-2xl font-semibold text-sky-300">context</h2>
+    <h2 class="pb-1 pt-4 text-2xl font-semibold text-sky-300">context</h2>
 
     <ul class="py-2 pl-4 leading-9">
       {{ context::list_item(name="from_global_context", value=from_global_context) }}
       {{ context::list_item(name="from_page_context", value=from_page_context) }}
+      {{ context::list_item(name="is_boosted", value=is_boosted) }}
+      {{ context::list_item(name="page_id", value=page_id) }}
     </ul>
 
-    <p class="pt-4 text-xs opacity-25">
+    <p class="pt-4 text-xs opacity-20">
       * calling this a stack is a joke, pick the tools that make sense for your
       project
     </p>

@@ -1,0 +1,7 @@
+{%- macro list_item(name, value) -%}
+  <li class="flex gap-2">
+    <pre class="text-sky-100/90">{{ name }}</pre>
+    <pre>=</pre>
+    <pre>"{{ value }}"</pre>
+  </li>
+{%- endmacro -%}

@@ -1,9 +1,11 @@
 use axum::{
+    extract::Path,
     http::StatusCode,
     response::{Html, IntoResponse, Response},
     routing::get,
     Router,
 };
+use axum_htmx::HxBoosted;
 use notify::Watcher;
 use tera::{Context, Tera};
 use tower_http::services::ServeDir;
@@ -54,6 +56,20 @@ async fn index_page() -> Result<Html<String>, AppError> {
     Ok(Html(rendered))
 }
 
+async fn some_page_by_id(
+    HxBoosted(boosted): HxBoosted,
+    Path(id): Path<String>,
+) -> Result<Html<String>, AppError> {
+    let is_boosted = boosted.clone();
+    let mut page_context = Context::new();
+    page_context.insert("from_page_context", "value from some page context");
+    page_context.insert("page_id", &id);
+    page_context.insert("is_boosted", &is_boosted);
+    let rendered = render_with_context("pages/some_page.tera", &page_context)?;
+
+    Ok(Html(rendered))
+}
+
 fn setup_reload_watchers(reloader: tower_livereload::Reloader) -> Result<(), notify::Error> {
     let mut watcher = notify::recommended_watcher(move |_| reloader.reload())?;
     watcher.watch(
@@ -77,6 +93,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app = Router::new()
         .nest_service("/public", ServeDir::new("public"))
         .route("/", get(index_page))
+        .route("/page/:id", get(some_page_by_id))
         .layer(live_reload);
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
