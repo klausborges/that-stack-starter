@@ -1,0 +1,12 @@
+{
+  "name": "that-stack-starter",
+  "version": "0.1.0",
+  "author": "Klaus Borges",
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "prettier": "^3.3.1",
+    "prettier-plugin-jinja-template": "^1.4.0",
+    "prettier-plugin-tailwindcss": "^0.6.2"
+  }
+}

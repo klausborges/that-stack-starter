@@ -1,0 +1,24 @@
+{% extends 'layouts/base.tera' %}
+
+{% block title %}THAT Stack{% endblock %}
+
+{% block content %}
+  <h1>Welcome!</h1>
+
+  <p>
+    This is the index page for
+    <span class="font-semibold">THAT Stack*</span>
+  </p>
+
+  <ul>
+    <li>Tera</li>
+    <li>HTMX</li>
+    <li>Axum</li>
+    <li>TailwindCSS</li>
+  </ul>
+
+  <p class="text-xs">
+    * Calling this a stack is a joke. Just pick the tools that make sense for
+    your project.
+  </p>
+{% endblock %}

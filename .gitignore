@@ -1,0 +1,6 @@
+# Rust
+/target
+
+# Node
+/node_modules
+pnpm-lock.yaml
